@@ -1,7 +1,7 @@
 require 'rails/generators'
 require 'rails/generators/generated_attribute'
 
-module Adminlte
+module AdminlteThemed
   module Generators
     class ThemedGenerator < ::Rails::Generators::Base
       source_root File.expand_path('../templates', __FILE__)
