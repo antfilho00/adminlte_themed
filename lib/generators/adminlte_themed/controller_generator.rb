@@ -1,4 +1,4 @@
- require 'generators/adminlte/generator_helpers'
+ require 'generators/adminlte_themed/generator_helpers'
 # include Rails::Generators::ResourceHelpers
 # include Adminlte::Generators::GeneratorHelpers
 
@@ -6,7 +6,7 @@ module AdminlteThemed
   module Generators
     class ControllerGenerator < Rails::Generators::NamedBase
       include Rails::Generators::ResourceHelpers
-      include Adminlte::Generators::GeneratorHelpers
+      include AdminlteThemed::Generators::GeneratorHelpers
 
       source_root File.expand_path("../templates", __FILE__)            	
       
