@@ -1,12 +1,14 @@
 class <%= controller_class_name %>Controller < ApplicationController
   before_action :set_<%= singular_name %>, only: [:show, :edit, :update, :destroy]
+<% if with_breadcrump? -%>
   before_action :set_breadcrumb, only: [:index, :new, :edit]
-<% if show_devise? -%>
+<% end -%>  
+<% if with_devise? -%>
   before_action :authenticate_user!
   load_and_authorize_resource
 <% end -%>  
   def index
-    @<%= plural_name %> = <%= class_name.underscore.humanize %>.page params[:page]
+    @<%= plural_name %> = <% if with_kaminari? -%> <%= class_name.underscore.humanize %>.page params[:page] <% else -%> <%= class_name.underscore.humanize %>.all <% end -%> 
   end
  
   def show
@@ -23,9 +25,9 @@ class <%= controller_class_name %>Controller < ApplicationController
     @<%= singular_name %> = <%= class_name.underscore.humanize %>.new(<%= singular_name %>_params)
     if @<%= singular_name %>.save
       if params[:save_and_continue]
-        redirect_to edit_<%= singular_name %>_path(@<%= singular_name %>), notice: t("helpers.links.create_success_f", model: <%= class_name.underscore.humanize %>.model_name.human)
+        redirect_to edit_<%= singular_name %>_path(@<%= singular_name %>), notice: t("helpers.links.create_success", model: <%= class_name.underscore.humanize %>.model_name.human)
       elsif params[:save_and_finalize]
-        redirect_to @<%= singular_name %>, notice: t("helpers.links.create_success_f", model: <%= class_name.underscore.humanize %>.model_name.human)
+        redirect_to @<%= singular_name %>, notice: t("helpers.links.create_success", model: <%= class_name.underscore.humanize %>.model_name.human)
       end
     else
       flash[:errors] = @<%= singular_name %>.errors.full_messages
@@ -37,9 +39,9 @@ class <%= controller_class_name %>Controller < ApplicationController
   def update
     if @<%= singular_name %>.update(<%= singular_name %>_params)
       if params[:save_and_continue]
-        redirect_to edit_<%= singular_name %>_path(@<%= singular_name %>), notice: t("helpers.links.update_success_f", model: <%= class_name.underscore.humanize %>.model_name.human)
+        redirect_to edit_<%= singular_name %>_path(@<%= singular_name %>), notice: t("helpers.links.update_success", model: <%= class_name.underscore.humanize %>.model_name.human)
       elsif params[:save_and_finalize]
-        redirect_to @<%= singular_name %>, notice: t("helpers.links.update_success_f", model: <%= class_name.underscore.humanize %>.model_name.human)
+        redirect_to @<%= singular_name %>, notice: t("helpers.links.update_success", model: <%= class_name.underscore.humanize %>.model_name.human)
       end
     else
       flash[:errors] = @<%= singular_name %>.errors.full_messages
@@ -49,7 +51,7 @@ class <%= controller_class_name %>Controller < ApplicationController
 
   def destroy
     @<%= singular_name %>.destroy
-    redirect_to <%= plural_name %>_url, notice: t("helpers.links.destroy_success_f", model: <%= class_name.underscore.humanize %>.model_name.human)
+    redirect_to <%= plural_name %>_url, notice: t("helpers.links.destroy_success", model: <%= class_name.underscore.humanize %>.model_name.human)
   end
 
   private

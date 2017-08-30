@@ -7,12 +7,16 @@ module AdminlteThemed
 
       private
 
-      def show_action?
-        !options['skip_show']
+      def with_breadcrump?
+        options['with_breadcrump']
       end
-
-      def show_devise?
-        !options['skip_devise']
+      
+      def with_kaminari?
+        options['with_kaminari']
+      end
+      
+      def with_devise?
+        options['with_devise']
       end
 
       def model_exists?
@@ -46,14 +50,12 @@ module AdminlteThemed
       end
 
       def all_actions
-        actions = %w(index new create edit update destroy)
-        actions << 'show' if show_action?
+        actions = %w(index new create edit show update destroy)
         actions
       end
 
       def view_files
-        actions = %w(index new edit _form)
-        actions << 'show' if show_action?
+        actions = %w(index new edit show _form)
         actions
       end
 

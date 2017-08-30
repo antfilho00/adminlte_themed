@@ -1,9 +1,9 @@
-<%%= simple_form_for(@<%= resource_name %>) do |f| %>
+<%%= simple_form_for(@<%= singular_name %>) do |f| %>
   <div class="box-body">
-  <%- columns.each do |column| -%>
+  <%- editable_attributes.each do |attribute| -%>
     <div class="row">    
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">  
-      <%%=f.<%= column.reference? ? :association : :input %> :<%= column.name %> %>
+      <%%=f.<%= attribute.reference? ? 'association' : 'input' %> :<%= attribute.name %> %>
       </div>
     </div>
   <%- end -%>
@@ -11,7 +11,7 @@
   <div class="clearfix"></div>
   <div class="box-footer">
     <div class=" pull-right">
-      <%%= link_to <%= controller_routing_path %>_path, class: "btn btn-danger btn-sm btn-flat" do %>
+      <%%= link_to <%= plural_name %>_path, class: "btn btn-danger btn-sm btn-flat" do %>
         <i class="fa fa-ban fa-fw"></i> <%%= t('helpers.links.cancel') %>
       <%% end %>      
       <%%= button_tag(type: "submit", name: "save_and_continue", class: "btn btn-primary btn-sm btn-flat") do %>

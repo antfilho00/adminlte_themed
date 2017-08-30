@@ -1,0 +1,45 @@
+<%%- model_class = <%= singular_name.classify %> -%>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>      
+        <%- editable_attributes.each do |attribute| -%>
+          <th class="text-center"><%%= model_class.human_attribute_name(:<%= attribute.name %>) %></th>
+        <%- end -%>
+        <th class="text-center"><%%= model_class.human_attribute_name(:created_at) %></th>
+        <th class="text-center"><%%=t 'helpers.actions', default: t("helpers.actions") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%% @<%= plural_name %>.each do |<%= singular_name %>| %>
+        <tr>
+          <%- editable_attributes.each do |attribute| -%>
+            <td><%%= <%= singular_name %>.<%= attribute.name %> %></td>
+          <%- end -%>
+          <td><%%=l <%= singular_name %>.created_at, format: :long %></td>
+          <td class="text-center">
+            <%%= link_to <%= singular_name.downcase %>_path(<%= singular_name %>), class: 'btn btn-primary btn-xs', title: "#{ t('.show', default: t('helpers.links.show')) }" do %>
+              <i class="fa fa-eye fa-fw"></i>
+            <%%- end -%>
+            <%%= link_to edit_<%= singular_name.downcase %>_path(<%= singular_name %>), class: 'btn bg-yellow-active btn-xs', title: "#{ t('.edit', default: t('helpers.links.edit')) }" do %>
+              <i class="fa fa-pencil-square-o fa-fw"></i>
+            <%%- end -%>
+            <%%= link_to <%= singular_name.downcase %>_path(<%= singular_name %>), method: :delete, data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) }, class: 'btn btn-danger btn-xs', title: "#{ t('.destroy', default: t('helpers.links.destroy')) }" do %>
+              <i class="fa fa-trash-o fa-fw"></i>
+            <%%- end -%>
+          </td>
+        </tr>
+      <%% end %>
+    </tbody>
+  </table>
+</div>
+
+<%- if with_kaminari? -%>
+  <div class="box-footer clearfix">
+    <div class="pull-left"><%%= page_entries_info @<%= plural_name.downcase %>, entry_name: 'item' %></div>
+    <div class="pull-right">
+      <%%= paginate @<%= plural_name.downcase %> %>
+    </div>
+  </div> 
+<%- end -%>
+

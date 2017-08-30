@@ -1,0 +1,25 @@
+<%%- model_class = <%= singular_name.classify %> -%>
+<div class="box-body">
+  <div>
+    <dl>
+      <%- editable_attributes.each do |attribute| -%>
+        <dt><%%= model_class.human_attribute_name(:<%= attribute.name %>) %></dt>
+        <dd><%%= @<%= singular_name %>.<%= attribute.name %> %></dd>
+      <%- end -%>
+    </dl>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+  <div class="box-footer">
+    <div class=" pull-right">
+      <%%= link_to <%= plural_name %>_path, class: "btn btn-danger btn-sm btn-flat" do %>
+        <i class="fa fa-ban fa-fw"></i> <%%= t('helpers.links.cancel') %>
+      <%% end %>      
+      
+      <%%= link_to edit_<%= singular_name %>_path(@<%= singular_name %>), class: "btn bg-yellow-active btn-sm btn-flat" do %>
+        <i class='fa fa-edit fa-fw'></i> <%%= t('.edit', default: t("helpers.links.edit")) %>
+      <%% end %>
+    </div>
+  </div>
+</div>

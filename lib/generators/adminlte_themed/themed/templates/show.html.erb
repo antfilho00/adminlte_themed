@@ -1,10 +1,10 @@
 <%%- model_class = <%= resource_name.classify %> -%>
 <div class="box-body">
-  <div class="fieldset">
+  <div>
     <dl>
       <%- columns.each do |column| -%>
-        <dt class="label label-default"><%%= model_class.human_attribute_name(:<%= column.name %>) %></dt>
-        <dd><pre class="prettyprint"><%%= @<%= resource_name %>.<%= column.name %> %></pre></dd>
+        <dt><%%= model_class.human_attribute_name(:<%= column.name %>) %></dt>
+        <dd><%%= @<%= resource_name %>.<%= column.name %> %></dd>
       <%- end -%>
     </dl>
   </div>
