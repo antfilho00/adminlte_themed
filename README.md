@@ -6,8 +6,6 @@ TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
 ```ruby
 gem 'adminlte_themed'
 ```
@@ -19,10 +17,46 @@ And then execute:
 Or install it yourself as:
 
     $ gem install adminlte_themed
+    
+
+Install the gems:
+  
+https://github.com/kaminari/kaminari
+
+    $ gem install kaminari
+
+https://github.com/plataformatec/devise
+
+    $ gem install devise
+
+https://github.com/weppos/breadcrumbs_on_rails
+
+    $ gem install breadcrumbs_on_rails
 
 ## Usage
 
-TODO: Write usage instructions here
+To generate the controller and templates in the adminLte template:
+
+    $ rails g adminlte_themed:controller YOUR_MODEL
+
+Install 
+
+With Gem BreadCrump_Rails:
+
+    $ rails g adminlte_themed:controller -b YOUR_MODEL
+
+With Gem Kaminari:
+
+    $ rails g adminlte_themed:controller -k YOUR_MODEL
+
+With Gem Devise:
+
+    $ rails g adminlte_themed:controller -d YOUR_MODEL
+
+No views, Controller only:
+
+    $ rails g adminlte_themed:controller -sv YOUR_MODEL
+
 
 ## Development
 
